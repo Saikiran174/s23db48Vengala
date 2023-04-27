@@ -1,0 +1,28 @@
+extends layout
+
+block content
+  h1= title
+  - var school = results;
+  - let destination1 = `dispatch(\"/school/create\")`
+  button.btn( class="btn btn-secondary", onclick= destination1) Create
+  div(class="container_fluid")
+    each item, index in school
+     - let destination2 = `dispatch(\"/school/update?id=${item._id}\")`
+     - let destination3 = `dispatch(\"/school/delete?id=${item._id}\")`
+     - let destination4 = `dispatch(\"/school/detail?id=${item._id}\")`
+        div(class="row" onclick = `buy(${index})`)       
+            div(class="col-sm-2") #{item.school_name}
+            div(class="col-sm-2") #{item.school_type}
+            div(class="col-sm-2") #{item.strength}
+        button.btn( class="btn btn-dark", onclick= destination2) Update
+        button.btn( class="btn btn-primary", onclick= destination4) Details
+        button.btn( class="btn btn-warning", onclick= destination3) Delete
+
+  script.
+   function dispatch(path){
+    window.location.href=path
+   }
+  script.
+      function buy(indxnum){
+        alert('You purchased item'+ indxnum)
+      }

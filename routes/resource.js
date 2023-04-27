@@ -22,7 +22,7 @@ router.post('/school', school_controller.school_create_post);
 
 // DELETE request to delete Costume.
 
-//router.delete('/school/:id', school_controller.school_delete);
+router.delete('/school/:id', school_controller.school_delete);
 
 // PUT request to update Costume.
 

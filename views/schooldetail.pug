@@ -1,0 +1,25 @@
+extends layout
+
+block content
+  h1= title
+  if(toShow==null)
+        h2 Instance not found
+  else
+    - let schoolid = toShow._id
+    - let school_name = toShow.school_name
+    - let school_type = toShow.school_type
+    - let strength = toShow.strength
+        div
+            div.row
+                div(class='schoolAttr mr-3') school ID is:
+                div #{schoolid}
+            div.row
+                div(class='schoolAttr mr-3') school_name is:
+                div #{school_name}
+            div.row
+                div(class='schoolAttr mr-3') school_type is:
+                div #{school_type}
+            div.row
+                div(class='schoolAttr mr-3') strength is:
+                div #{strength}
+

@@ -1,0 +1,49 @@
+extends layout
+block content
+    h1= title
+    if (toShow == null)
+     h2 No instance to delete
+    else
+     - let schoolid = toShow._id
+     - let school_name = toShow.school_name
+     - let school_type = toShow.school_type
+     - let strength = toShow.strength
+     - let actionid = "/resource/school/" + schoolid
+     script let actionid = "#{actionid}"
+     div
+        div.row
+            div(class='schoolAttr mr-3') School ID is:
+            div #{schoolid}
+        div.row
+            div(class='schoolAttr mr-3') School Name is:
+            div #{school_name}
+        div.row
+            div(class='schoolAttr mr-3') School salary is:
+            div #{school_type}
+        div.row
+            div(class='schoolAttr mr-3') School Strength is:
+            div #{strength}
+     button(class="btn btn-danger m-2" onclick="deleteOnid()") Delete
+     button(class="btn btn-secondary m-2" onclick="cancel()") Cancel
+    script.
+        function cancel() {
+        // Go back to the home page for the schoolAttrlection
+        window.location.href='/school'
+        }
+    script.
+        function deleteOnid() {
+        console.log("starting delete")
+        // delete first
+        fetch(actionid, {
+        method: 'DELETE' 
+        }).then((resp) => {
+        return resp.json(); // or resp.text() or whatever the server sends
+        }).then((body) => {
+        alert("Delete succeded")
+        window.location.href='/school'
+        // TODO handle body
+        }).catch((error) => {
+        // TODO handle error
+        alert("Delete failed " + error )
+        });
+     }

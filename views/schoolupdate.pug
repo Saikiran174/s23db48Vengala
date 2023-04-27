@@ -1,0 +1,42 @@
+extends layout
+block content
+    h1= title
+    if(toShow==null)
+        h2 no instance found
+    else
+        - let schoolid = toShow._id
+        - let school_name = toShow.school_name
+        - let school_type = toShow.school_type
+        - let strength = toShow.strength
+        div.row(class='mb-2')
+            div.mr-1 ID is
+            div #{schoolid}
+        - let actionid = "/resource/school/" + schoolid
+        form(id='schoolForm', action= actionid, method="PUT")
+            div.form-group
+                label.schoolAttr(for='school_name') School name
+                input#school_name(type='text', name='school_name', value= school_name )
+            div.form-group
+                label.schoolAttr(for='school_type') School type
+                input#school_type(type='text', name='school_type', value= school_type )
+            div.form-group
+                label.schoolAttr(for='strength') strength
+                input#strength(type='number', name='strength', value= strength,min=100,max=1000 )
+            input(type="submit")
+        script.
+            document.forms['schoolForm'].addEventListener('submit', (event) => {
+                event.preventDefault();
+                // TODO do something here to show user that form is being submitted
+                fetch(event.target.action, {
+                    method: 'PUT',
+                    body: new URLSearchParams(new FormData(event.target)) // event.target is the form
+                }).then((resp) => {
+                    return resp.json(); // or resp.text() or whatever the server sends
+                }).then((body) => {
+                    alert("Update succeded")
+                // TODO handle body
+                }).catch((error) => {
+                // TODO handle error
+                    alert("Update failed " + error )
+                });
+            });
