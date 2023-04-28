@@ -19,7 +19,7 @@ router.get('/', school_controlers.school_view_all_Page );
 router.get('/detail', secured, school_controlers.school_view_one_Page);
 
 /* GET create school page */
-router.get('/create', secured, school_controlers.school_create_Page);g
+router.get('/create', secured, school_controlers.school_create_Page);
 
 /* GET create update page
 router.get('/update', school_controlers.school_update_Page); */
